@@ -4,12 +4,16 @@ import { GlobalContext } from '../context/GlobalState'
 
 export default function AddTransaction() {
     const [text, setText] = useState('')
-    const [amount, setAmount] = useState()
+    const [amount, setAmount] = useState(0)
 
     const { addTransaction } = useContext(GlobalContext)
 
     const onSubmit = (e) => {
         e.preventDefault()
+        if(amount === 0) {
+          return
+        }
+    
         const transaction = {
           id: v4(),
           text,
@@ -18,7 +22,7 @@ export default function AddTransaction() {
         addTransaction(transaction)
 
         setText('')
-        setAmount()
+        setAmount(0)
     }
 
   return (
